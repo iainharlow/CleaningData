@@ -1,4 +1,4 @@
-## This script performs the following functions:
+## This script performs the following functions USING dplyr:
 
 # 1. Merges the training and the test sets to create one data set.
 # 2. Extracts only the measurements on the mean and standard deviation for each 
@@ -9,6 +9,7 @@
 # with the average of each variable for each activity and each subject.
 
 library(plyr)
+library(dplyr)
 
 # Step 1: Read in and merge training and test datasets.
 # Be sure to place extracted data folder (UCI HAR Dataset) in working directory.
@@ -56,7 +57,10 @@ subject_test<-read.table("~/UCI HAR Dataset/test/subject_test.txt",header=F,sep=
 SUBJECT<-rbind(subject_train,subject_test)[,1]
 mean_std_data<-cbind(SUBJECT,mean_std_data)
 
-cleandata <- mean_std_data[complete.cases(mean_std_data),]
-df <- tapply(cleandata[,3:68],cleandata$SUBJECT,mean)
+# Remove any missing values and convert to plyr format:
+tidydata <- tbl_df(mean_std_data[complete.cases(mean_std_data),])
 
-df <- ddply(cleandata[,3:68], .(SUBJECT,ACTIVITY), mean)
+    
+grouped_table<-group_by(tidydata,SUBJECT,ACTIVITY)
+df<-summarise_each(grouped_table,funs(mean))
+write.table(df,"df.txt",row.name=FALSE)

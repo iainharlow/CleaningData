@@ -1,3 +1,9 @@
+IMPORTANT NOTE: Repository contains the tidy table df.txt (as outputted by the script and required for the assignment). This is because I accidentally uploaded an old (incomplete) version of df.txt to the submission page, and didn't realise until after the deadline. Technically that version *is* a tidy table, but as it contains just one column of NAs it's probably not worth full marks...
+
+The script here should successfully generate the correct tidy table df.txt.
+
+
+
 This script performs the following functions:
 
 1. Merges the training and the test sets to create one data set.
@@ -7,27 +13,15 @@ This script performs the following functions:
 5. From the data set in step 4, creates a second, independent tidy data set 
 with the average of each variable for each activity and each subject.
 
-This script uses the package plyr.
+This script uses the packages plyr/dplyr.
 
-Be sure to place extracted data folder (UCI HAR Dataset) in working directory.
-
-
+Be sure to place the extracted data folder (UCI HAR Dataset) in your working directory prior to running run_analysis.R.
 
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-README for original data collection:
+For reference - README for original data collection:
 
 ==================================================================
 Human Activity Recognition Using Smartphones Dataset
